@@ -58,9 +58,9 @@ make_server_msg = (
     # cwd
     """Enter the path to server's working directory.\nYou can change it later\n{skipmsg}""",
     # autostart
-    """Should server automatically start after wrapper has been launched? Enter yes or no.\nYou can change it later""",
+    """Should server automatically start after wrapper has been launched? Hit y for yes or n for no.\nYou can change it later""",
     # autorestart
-    """In case the server crashes, does it require automatic restart? Enter yes or no.\nYou can change it later""",
+    """In case the server crashes, does it require automatic restart? Hit y for yes or n for no.\nYou can change it later""",
     # timed_autorestart + timed_autorestart_interval
     """Is it needed to restart the server every N minutes? Leave empty string or 0 if autorestarts aren't required.\n"""
     """You can change it later\n"""
