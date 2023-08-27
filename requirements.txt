@@ -1,0 +1,3 @@
+git+https://github.com/NobWow/admin-console-python.git
+defusedxml
+packaging
