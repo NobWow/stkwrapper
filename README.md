@@ -76,21 +76,21 @@ Step 2: working directory for the server process. Useful in some cases. Let's us
 ```
 Enter the path to server's working directory.
 You can change it later
-Current working directory: "/home/hyper/stkwrapper" for relative path reference
-Press return to skip and set the default value "/home/hyper/stkwrapper/tutorial" 
+Current working directory: "/home/user/stkwrapper" for relative path reference
+Press return to skip and set the default value "/home/user/stkwrapper/tutorial" 
 cwd: 
 ```
 Additionally, if this directory doesn't exist, which is likely, it will ask you to create this directory. Press `y` to confirm:
 ```
 This directory doesn't exist. Create one?
-create dir "/home/hyper/stkwrapper/tutorial"? y
+create dir "/home/user/stkwrapper/tutorial"? y
 ```
 Step 3: server configuration file path. It will be passed as `--server-config=` argument to the server process as noted in [NETWORKING.md](https://github.com/supertuxkart/stk-code/blob/master/NETWORKING.md). Let's specify `server.xml`:
 ```
 Directory created for server
 Enter the path to configuration file. It must have the XML format (.xml).
 You can change it later
-Current working directory: "/home/hyper/stkwrapper/tutorial" for relative path reference
+Current working directory: "/home/user/stkwrapper/tutorial" for relative path reference
 Press return to skip and set the default value "" 
 cfgpath: server.xml
 ```
@@ -103,7 +103,7 @@ Step 4: path to the directory that contains `data/`. It is required for every Su
 ```
 Enter the path to the "data" directory that will be used for the new server.
 You can change it later
-Current working directory: "/home/rocker/tutorial" for relative path reference
+Current working directory: "/home/user/tutorial" for relative path reference
 Press return to skip and set the default value "stk-code" 
 TIP: it is usually either /usr/share/supertuxkart
     or in case of GIT version /path/to/stk-code
@@ -113,7 +113,7 @@ Step 5: Specify where the executable file is. It is either at `/usr/bin/supertux
 ```
 Enter the path to supertuxkart executable file (program).
 You can change it later
-Current working directory: "/home/rocker/tutorial" for relative path reference
+Current working directory: "/home/user/tutorial" for relative path reference
 Press return to skip and set the default value "supertuxkart" 
 exec: ~/stk-code/build/bin/supertuxkart
 ```
@@ -140,14 +140,14 @@ timed autorestart minutes (or empty):
 Step 9: how much time should the server not exceed when starting up? Let's leave the default value (120 seconds) by hitting Enter:
 ```
 How many seconds the server has to initialize? When this timeout exceeds during server startup, the process is killed.
-Current working directory: "/home/rocker" for relative path reference
+Current working directory: "/home/user" for relative path reference
 Press return to skip and set the default value "120.0" 
 startup timeout (n.n): 
 ```
 Step 10: same as the above, but when the server is shutting down. The default value can be too high in most cases so let's specify `6.0` seconds:
 ```
 How many seconds the server has to shutdown?When this timeout exceeds during server shutdown, the process is killed.
-Current working directory: "/home/rocker" for relative path reference
+Current working directory: "/home/user" for relative path reference
 Press return to skip and set the default value "120.0" 
 shutdown timeout (n.n): 6.0
 ```
