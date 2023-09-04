@@ -1,6 +1,6 @@
 """
 * stkserver_wrapper.py - main file for starting servers
-* License: GNU GPL v3
+* License: GNU LGPL v2.1
 * Author: DernisNW (a.k.a. NobWow)
 """
 import asyncio
