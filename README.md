@@ -1,5 +1,5 @@
 # stkwrapper
-SuperTuxKart Server written in Python with CLI interface. Supports autorestarting, extensions and automatic add-on downloading/upgrading.
+SuperTuxKart Server Wrapper written in Python with CLI interface. Supports autorestarting, extensions and automatic add-on downloading/upgrading.
 
 Tested on STK 1.4 git version.
 
