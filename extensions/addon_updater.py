@@ -493,7 +493,7 @@ async def install_new_addons(ext: AdminCommandExtension):
         triplet[0] for triplet in filter(
             _predicate,
             zip(
-                ext.data['addons_tree'].getroot(), repeat(_allow), repeat(_deny)
+                ext.data['addons_dict'].values(), repeat(_allow), repeat(_deny)
             )
         )
     )
