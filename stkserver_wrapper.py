@@ -83,7 +83,7 @@ make_server_msg = (
 
 def load_config(ace: AdminCommandExecutor):
     ace.load_config()
-    _ver = ace.config['stk_version'] = ace.config.get('stk_version', '1.3.0')
+    _ver = ace.config['stk_version'] = ace.config.get('stk_version', '1.4.0')
     ace.config['logpath'] = ace.config.get('logpath', 'logs')
     ace.config['servers'] = ace.config.get('servers', {})
     ace.config['datapath'] = ace.config.get('datapath', 'stk-code')
@@ -1217,7 +1217,7 @@ async def main():
     ace.server_restart_clk = partial(server_restart_clk, ace)
     ace.servers: MutableMapping[str, STKServer] = {}
     _servers_to_start = []
-    _ver = ace.config['stk_version'] = ace.config.get('stk_version', '1.3.0')
+    _ver = ace.config['stk_version'] = ace.config.get('stk_version', '1.4.0')
     _logpath = ace.config['logpath'] = ace.config.get('logpath', 'logs')
     _servers = ace.config['servers'] = ace.config.get('servers', {})
     ace.config['datapath'] = ace.config.get('datapath', 'stk-code')
