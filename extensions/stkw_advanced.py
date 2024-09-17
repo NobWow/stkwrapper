@@ -27,11 +27,13 @@ import logging
 import datetime
 
 
-joinmsg_parser = re.compile(r'New player (?P<username>\S+) with online id (?P<online_id>\d+) from '
-                            r'(?P<ipv4_addr>[\d.]+)?(?P<ipv6_addr>[0-9a-fA-F:]+)?(?::(?P<port>\d+))? with '
-                            r'(?P<version>.*)\..*')
+# joinmsg_parser = re.compile(r'New player (?P<username>\S+) with online id (?P<online_id>\d+) from '
+#                            r'(?P<ipv4_addr>[\d.]+)?(?P<ipv6_addr>[0-9a-fA-F:]+)?(?::(?P<port>\d+))? with '
+#                            r'(?P<version>.*)\..*')
+joinmsg_parser = re.compile(r'playerjoin (?P<username>\S+) (?P<online_id>\d+)')
 validatemsg_parser = re.compile(r'(?P<username>\S+) validated')
-leavemsg_parser = re.compile(r'(?P<username>\S+) disconnected')
+# leavemsg_parser = re.compile(r'(?P<username>\S+) disconnected')
+leavemsg_parser = re.compile(r'playerleave (?P<username>\S+) (?P<online_id>\d+)')
 modediff_parser = re.compile(r'Updating server info with new difficulty: (?P<difficulty>\d+), game mode: (?P<mode>\d+) to stk-addons\.')
 modediff_obj = joinleave_logobject = gamestopped_obj = gameresumed_obj = 'ServerLobby'
 modediff_level = joinleave_loglevel = gamestopped_lvl = gameresumed_lvl = logging.INFO
