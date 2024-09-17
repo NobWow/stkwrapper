@@ -36,7 +36,7 @@ validatemsg_parser = re.compile(r'(?P<username>\S+) validated')
 leavemsg_parser = re.compile(r'playerleave (?P<username>\S+) (?P<online_id>\d+)')
 modediff_parser = re.compile(r'Updating server info with new difficulty: (?P<difficulty>\d+), game mode: (?P<mode>\d+) to stk-addons\.')
 modediff_obj = joinleave_logobject = gamestopped_obj = gameresumed_obj = 'ServerLobby'
-modediff_level = joinleave_loglevel = gamestopped_lvl = gameresumed_lvl = logging.INFO
+modediff_level = joinleave_loglevel = gamestopped_lvl = gameresumed_lvl = logging.DEBUG
 soccergoal_red = re.compile(r'(own_)?goal (\S*) red\.?')
 soccergoal_blue = re.compile(r'(own_)?goal (\S*) blue\.?')
 gamestopped_l = 'The game is stopped.'
