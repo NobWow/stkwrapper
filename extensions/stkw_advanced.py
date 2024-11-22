@@ -41,8 +41,8 @@ soccergoal_red = re.compile(r'(own_)?goal (\S*) red\.?')
 soccergoal_blue = re.compile(r'(own_)?goal (\S*) blue\.?')
 gamestopped_l = 'The game is stopped.'
 gameresumed_l = 'The game is resumed.'
-soccergoal_logobject = 'GoalLog'
-soccergoal_loglevel = logging.INFO
+soccergoal_logobject = 'SoccerWorld'
+soccergoal_loglevel = logging.DEBUG
 main = sys.modules['__main__']
 STKServer = main.STKServer
 gamemode_names = (
@@ -232,7 +232,7 @@ async def extension_init(ext: AdminCommandExtension):
         async def chat(self, message: str, noblock=False, allow_cmd=False):
             """Execute chat command. Prevents from executing lobby commands, if allow_cmd is False (default)
             Use noblock=True if this command executed in a log handler"""
-            _data = f"chat {' ' if message.startswith('/') and not allow_cmd else ''}{message}"
+            _data = f"bc {' ' if message.startswith('/') and not allow_cmd else ''}{message}"
             if noblock:
                 _process: asyncio.subprocess.Process = self.server.process
                 _process.stdin.write(_data.encode() + b'\n')
@@ -249,6 +249,7 @@ async def extension_init(ext: AdminCommandExtension):
                     username = _joinmatch.group('username')
                     if username not in self.players:
                         if await self.player_join.emit(username, _match=_joinmatch):
+                            self.logger.info(f'emit player {username}')
                             self.players.add(username)
                         else:
                             await self.kick(username, True)
@@ -261,11 +262,11 @@ async def extension_init(ext: AdminCommandExtension):
                         if await self.player_leave.emit(username, _match=_leavematch):
                             try:
                                 self.players.remove(username)
-                            except ValueError:
+                            except KeyError:
                                 pass
                             try:
                                 self.valid_players.remove(username)
-                            except ValueError:
+                            except KeyError:
                                 pass
             if objectname == self._gamestart_obj and level == self._gamestartend_lvl:
                 _match = self._gamestart_parser.fullmatch(message)
@@ -460,11 +461,12 @@ async def extension_init(ext: AdminCommandExtension):
             continue
         ext.server_enhancers[servername] = ServerEnhancer(ext.ace.servers[servername])
         ext.logmsg(f'{servername} enhanced as a regular server')
-    no_nice = not config.getboolean('SoccerEnhancers', 'sayNiceWhen69', fallback=True)
+    no_nice = not config.getboolean('SoccerEnhancers', 'sayNiceWhen69', fallback=False)
+    no_brde = not config.getboolean('SoccerEnhancers', 'sayBrDeFlagsWhen17', fallback=False)
     for servername in config.get('SoccerEnhancers', 'servers', fallback='').split(' '):
         if servername in ext.server_enhancers or not servername:
             continue
-        ext.server_enhancers[servername] = STKSoccer(ext.ace.servers[servername], no_nice=no_nice)
+        ext.server_enhancers[servername] = STKSoccer(ext.ace.servers[servername], no_nice=no_nice, no_brde=no_brde)
         ext.logmsg(f'{servername} enhanced as a soccer server')
 
 

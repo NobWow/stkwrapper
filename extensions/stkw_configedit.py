@@ -36,7 +36,6 @@ async def extension_init(ext: AdminCommandExtension):
         enhancer = stkw_advanced.server_enhancers[servername]
         return list(element.tag for element in enhancer.servercfg.iter() if element.tag.startswith(cfgkey))
 
-    
     async def stk_getcfg(cmd: AdminCommandExecutor, servername: str, cfgkey: str):
         if servername not in stkw_advanced.server_enhancers:
             cmd.error(f'Server "{servername}" not found or not enhanced.', log=False)
