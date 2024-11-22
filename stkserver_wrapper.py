@@ -521,7 +521,7 @@ class STKServer:
                 await self.process.stdin.drain()
 
     def idleCancel(self) -> bool:
-        if not self.reader_task.done() and self.idle_cancellable:
+        if self.reader_task is not None and not self.reader_task.done() and self.idle_cancellable:
             self.reader_task.cancel()
             return True
         return False
