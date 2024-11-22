@@ -39,7 +39,7 @@ server_attribs = ('cfgpath', 'datapath', 'executable_path', 'cwd',
                   'timed_autorestart_interval', 'startup_timeout', 'shutdown_timeout',
                   'extra_env', 'extra_args')
 no_yes = ('no', 'yes')
-yes_match = re.compile(r' *[yY+1][yYeEaAhHpP ]*')
+yes_match = re.compile(r' *[yY+1][yYeEaAhHpPsS ]*')
 no_match = re.compile(r' *[nN\-0][nNoOpPeE ]*')
 splitter = re.compile(r'[, ] *')
 make_server_skipmsg = ("""Current working directory: "{cwd}" for relative path reference\n"""
@@ -210,6 +210,7 @@ class STKServer:
         self.cwd = cwd
         self.writeln = writeln
         self.active = False
+        self.ready = False
         self.restart = False
         self.autostart = autostart
         self.autorestart = autorestart
@@ -311,6 +312,7 @@ class STKServer:
         assert self.start_stop_guard is not None
         try:
             await asyncio.wait_for(self.ready_event.wait_for_successful(), timeout)
+            self.ready = True
         except asyncio.TimeoutError:
             self.logger.warning(f'STK {self.name} has not become ready within {timeout} seconds, killing')
             self.process.kill()
@@ -361,10 +363,12 @@ class STKServer:
                 self.logger.debug('STKServer.stop: post-interrupt')
             if timeout is None:
                 await self.process.wait()
+                self.ready = False
                 return True
             else:
                 try:
                     await asyncio.wait_for(self.process.wait(), timeout)
+                    self.ready = False
                     return True
                 except asyncio.TimeoutError:
                     self.logger.warning(f'STK {self.name} shutdown operation timed out, killing.')
@@ -418,6 +422,7 @@ class STKServer:
                 self.server_ready_task.cancel()
                 # start_stop_guard is now unlocked by cancelling this task
         self.process = None
+        self.ready = False
         self.active = False
         self.empty_server.set()
         if self.autorestart and self.restart:
