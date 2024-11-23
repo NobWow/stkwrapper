@@ -581,7 +581,8 @@ def stkwrapper_command_set(ace: AdminCommandExecutor):
             if item:
                 _kwargs[name] = item
         try:
-            _server = STKServer(ace.logger, ace.ainput.writeln, name, restarter_cond=ace.server_restart_cond, **_kwargs)
+            _server = STKServer(ace.logger, ace.ainput.writeln, name, restarter_cond=ace.server_restart_cond,
+                                start_stop_guard=ace.start_stop_guard, **_kwargs)
         except FileNotFoundError as exc:
             cmd.error(f'Failed, {exc}, re-check the path', log=False)
             return
